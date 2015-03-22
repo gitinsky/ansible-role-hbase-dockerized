@@ -1,0 +1,12 @@
+---
+- name: make a build dir
+  file: state=directory name=/root/hbase-dockerized
+
+- name: put Dockerfile
+  template: src=Dockerfile dest=/root/hbase-dockerized/Dockerfile
+
+- name: build a Docker image for HBase
+  command: docker build -t gitinsky/hbase:0.1.0 --rm /root/hbase-dockerized
+
+- name: tag it as latest
+  command: docker build -t gitinsky/hbase:latest --rm /root/hbase-dockerized
